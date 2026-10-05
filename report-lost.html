@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Lost Item - ClaimGuard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-shield-check"></i> ClaimGuard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" id="dynamicNav"></ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h2 class="fw-bold mb-1">Report Lost Item</h2>
+                        <p class="text-muted mb-0">Student / Owner function</p>
+                    </div>
+                    <a href="student-dashboard.html" class="btn btn-outline-secondary btn-sm">← Back to Dashboard</a>
+                </div>
+
+                <div class="alert alert-warning small">
+                    <i class="bi bi-shield-lock"></i> <strong>Security-aware design:</strong> Public description is visible to finders and officers. 
+                    Private ownership evidence is collected separately and stored protected. It is never shown in public listings and is only revealed to Security Officers during verification.
+                </div>
+
+                <div class="card border-0 shadow">
+                    <div class="card-body p-4">
+                        <form id="reportForm" novalidate>
+                            <h5 class="mb-3 text-primary"><i class="bi bi-eye"></i> Public Information</h5>
+                            <p class="small text-muted">Visible to finders and security staff.</p>
+
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label for="itemCategory" class="form-label">Category <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="itemCategory" required>
+                                        <option value="">Select category</option>
+                                        <option value="electronics">Electronics (Laptop, Phone, etc.)</option>
+                                        <option value="id-cards">ID Cards / Documents</option>
+                                        <option value="accessories">Accessories (Calculator, Power Bank, etc.)</option>
+                                        <option value="bags">Bags / Backpacks</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select a category.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="itemName" class="form-label">Item Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="itemName" placeholder="e.g. Black Dell Laptop" required maxlength="100">
+                                    <div class="invalid-feedback">Please enter the item name.</div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="publicDesc" class="form-label">Public Description <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="publicDesc" rows="3" placeholder="Color, brand, approximate size, last seen location..." required maxlength="500"></textarea>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="invalid-feedback">Please provide a public description.</div>
+                                        <small class="text-muted ms-auto"><span id="charCount">0</span>/500 characters</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastSeen" class="form-label">Last Seen Location</label>
+                                    <input type="text" class="form-control" id="lastSeen" placeholder="e.g. Library 2nd floor">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lostDate" class="form-label">Date Lost</label>
+                                    <input type="date" class="form-control" id="lostDate">
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <h5 class="mb-3 text-success"><i class="bi bi-lock"></i> Private Ownership Evidence</h5>
+                            <p class="small text-muted">Never shown publicly. Used only for ownership verification by Security Officers.</p>
+
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <label for="serialNumber" class="form-label">Serial Number / Unique ID</label>
+                                    <input type="text" class="form-control" id="serialNumber" placeholder="Optional but recommended" autocomplete="off">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="uniqueMark" class="form-label">Unique Mark / Scratch / Sticker</label>
+                                    <input type="text" class="form-control" id="uniqueMark" placeholder="e.g. Blue sticker on bottom" autocomplete="off">
+                                </div>
+                                <div class="col-12">
+                                    <label for="evidenceNotes" class="form-label">Additional Private Notes</label>
+                                    <textarea class="form-control" id="evidenceNotes" rows="2" placeholder="Receipt number, purchase date, or other proof only you would know" maxlength="300"></textarea>
+                                    <small class="text-muted"><span id="evidenceCharCount">0</span>/300 characters</small>
+                                </div>
+                            </div>
+
+                            <div id="formAlert" class="alert d-none" role="alert"></div>
+
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button type="submit" class="btn btn-primary px-4">
+                                    <i class="bi bi-send"></i> Submit Report
+                                </button>
+                                <button type="reset" class="btn btn-outline-secondary">Clear Form</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="successModal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-success text-white">
+                                <h5 class="modal-title"><i class="bi bi-check-circle"></i> Report Submitted</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Your lost item report has been recorded (prototype).</p>
+                                <ul class="small">
+                                    <li>Public description is ready for matching.</li>
+                                    <li>Private evidence is protected and only visible to Security Officers.</li>
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+                                <a href="student-dashboard.html" class="btn btn-outline-primary">Back to Dashboard</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-shield-check"></i> ClaimGuard</h5>
+                    <p class="small text-white-50 mb-0">Campus Lost & Found with Secure Ownership Verification</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="small text-white-50 mb-0">Group: Sheraz Kaleem (21L-5782) & Ahmed Mujtaba (23F-3053)</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

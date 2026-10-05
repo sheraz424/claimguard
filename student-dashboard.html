@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - ClaimGuard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-shield-check"></i> ClaimGuard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" id="dynamicNav"></ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5" id="studentDashboard">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="fw-bold mb-1">Student Dashboard</h2>
+                <p class="text-muted mb-0">Welcome, <strong id="welcomeName">Student</strong> | Roll: <span id="userRoll">—</span></p>
+            </div>
+            <button class="btn btn-outline-danger" id="btnLogout">
+                <i class="bi bi-box-arrow-right"></i> Logout
+            </button>
+        </div>
+
+        <div class="alert alert-info small">
+            <i class="bi bi-info-circle"></i> You are logged in as <strong>Student / Owner</strong>. 
+            You can report lost items and manage your claims. Private evidence you submit is protected and only visible to Security Officers during verification.
+        </div>
+
+        <div class="row g-4">
+            <!-- Function 1: Report Lost Item -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm text-center">
+                    <div class="card-body p-4">
+                        <i class="bi bi-plus-circle display-4 text-primary mb-3"></i>
+                        <h5>Report Lost Item</h5>
+                        <p class="text-muted small">Submit a new lost item report with public description and private ownership evidence.</p>
+                        <a href="report-lost.html" class="btn btn-primary">Go to Report</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Function 2: My Reports -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm text-center">
+                    <div class="card-body p-4">
+                        <i class="bi bi-list-ul display-4 text-primary mb-3"></i>
+                        <h5>My Reports</h5>
+                        <p class="text-muted small">View the status of items you have reported as lost.</p>
+                        <button class="btn btn-outline-primary" onclick="alert('Prototype: Your reports would appear here (CLM-001 - Black Dell Laptop - Pending Verification)')">
+                            View My Reports
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Function 3: Submit Ownership Claim -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm text-center">
+                    <div class="card-body p-4">
+                        <i class="bi bi-shield-check display-4 text-primary mb-3"></i>
+                        <h5>Submit Ownership Claim</h5>
+                        <p class="text-muted small">Claim a found item by proving knowledge of private evidence.</p>
+                        <button class="btn btn-outline-primary" onclick="alert('Prototype: Claim form would open here. You would provide private evidence knowledge for verification.')">
+                            Start Claim
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security note -->
+        <div class="card border-0 bg-light mt-4">
+            <div class="card-body">
+                <h6><i class="bi bi-lock"></i> Security-Aware Design</h6>
+                <ul class="small mb-0">
+                    <li>Private ownership evidence (serial numbers, unique marks) is never shown in public listings.</li>
+                    <li>Only Security Officers can view full private evidence during claim verification.</li>
+                    <li>You cannot approve or reject claims — that function is restricted to Officers.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-shield-check"></i> ClaimGuard</h5>
+                    <p class="small text-white-50 mb-0">Campus Lost & Found with Secure Ownership Verification</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="small text-white-50 mb-0">Group: Sheraz Kaleem (21L-5782) & Ahmed Mujtaba (23F-3053)</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
